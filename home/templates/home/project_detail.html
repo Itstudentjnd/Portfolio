@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{% static 'assets/css/styles.css' %}">
+    <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+    <link href='https://unpkg.com/boxicons@latest/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <title>Portfolio Website</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: #c9d1d9;
+            font-family: 'Poppins', sans-serif;
+        }
+        .card-img-top {
+            object-fit: cover;
+            height: 100%;
+        }
+        .card {
+            border-radius: 0.75rem;
+            overflow: hidden;
+            background-color: #161b22;
+            border: 1px solid #30363d;
+        }
+        .white-card {
+            background-color: #21262d;
+            border: 1px solid #30363d;
+        }
+        .section-head {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #58a6ff;
+        }
+        .lead {
+            font-size: 1.2rem;
+            color: #8b949e;
+        }
+        .btn-primary {
+            background-color: #58a6ff;
+            border: none;
+            color: #ffffff;
+        }
+        .btn-primary:hover {
+            background-color: #1f6feb;
+        }
+        .container {
+            max-width: 1200px;
+        }
+        .modal-img {
+            width: 100%;
+            height: auto;
+        }
+        .modal-title{
+            color:white;
+        }
+        .main-image {
+            height: 500px;        
+        }
+        .back-button {
+            background-color: #161b22;
+            color: #58a6ff;
+            border: 1px solid #30363d;
+        }
+        .back-button:hover {
+            background-color: #21262d;
+            color: #ffffff;
+        }
+        .shadow-custom {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+        }
+        .modal-header {
+            background-color: #f5f5f5;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<section class="project-details section py-5" id="project-details">
+    <div class="container">
+        <!-- Back to Work List Button at the Top -->
+        <div class="row mb-4">
+            <div class="col text-start">
+                <a href="{% url 'home' %}" class="btn btn-lg back-button shadow-custom">
+                    <i class="bi bi-arrow-left-circle"></i> Back to Projects
+                </a>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Left Side: Main Project Image in a White Card -->
+            <div class="col-md-7 mb-4">
+                <div class="card white-card shadow-custom main-image">
+                    <img src="{{ project.image.url }}" class="card-img-top" alt="{{ project.name }}">
+                </div>
+            </div>
+
+            <!-- Right Side: Project Name and Description -->
+            <div class="col-md-5">
+                <div class="card shadow-custom p-4">
+                    <!-- Project Title and Description -->
+                    <h2 class="section-head">{{ project.name }}</h2>
+                    <p class="lead">{{ project.description }}</p>
+                </div>
+            </div>
+        </div>
+
+        
+        <!-- Related Images Section: Full Row Below the Project Details -->
+         {% if project.images.all %}
+        <div class="row mt-4">
+            <h3 class="section-head">Related Images</h3>
+            {% for image in project.images.all %}
+                <div class="col-md-3 col-sm-6 mb-3">
+                    <div class="card shadow-custom">
+                        <img src="{{ image.image.url }}" class="card-img-top" alt="Related image" data-bs-toggle="modal" data-bs-target="#imageModal{{ forloop.counter }}">
+                    </div>
+                </div>
+
+                <!-- Modal for Fullscreen Image -->
+                <div class="modal fade" id="imageModal{{ forloop.counter }}" tabindex="-1" aria-labelledby="imageModalLabel{{ forloop.counter }}" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <img src="{{ image.image.url }}" class="modal-img" alt="Related image">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>

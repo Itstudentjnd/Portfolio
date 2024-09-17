@@ -14,4 +14,4 @@ Welcome to the Portfolio Website project. This website is designed to showcase p
 * **Color Scheme**: Black and neon blue theme for a modern look.
 * **Slider**: Custom slider for showcasing your work in a unique and interactive way.
 ## Contact
-For any feedback or suggestions, feel free to reach out via the Contact Page of the website or email at [7623977045harsh@gmail.com].
+For any feedback or suggestions, feel free to reach out via the Contact Page of the website or email at 7623977045harsh@gmail.com.
